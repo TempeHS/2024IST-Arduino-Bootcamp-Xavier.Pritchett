@@ -9,7 +9,6 @@
     5. I can create and correctly wire a LED in TINKERCAD and prototype my code
     6. I understand that a resistor is needed to reduce the voltage for the LED
     7. I understand what 'static' means before the int declaration
-    8. I can organise output data so it correctly plots on the serial monitor
     9. I can apply this knowledge to the LED & Buzzer in the sensor kit
 
   Student Notes: 
@@ -23,10 +22,21 @@
 
 */
 
-void setup() {
+static unsigned int myLED = 8;
+bool myToggle = false;
+static unsigned int myBoardLED = 13;
 
+void setup() {
+  Serial.begin(9600);
+  Serial.println("Configured to 9600");
+  Serial.println("__________________");
+  pinMode(myLED, OUTPUT); //configure pin for output
+  pinMode(myBoardLED, OUTPUT); //board pin led?
 }
 
 void loop() {
-
+  myToggle = !myToggle;
+  digitalWrite(myLED, myToggle);
+  digitalWrite(myBoardLED, !myToggle); //it works 
+  delay(1000);
 }
