@@ -10,6 +10,7 @@
     6. I can organise output data so it correctly plots on the serial monitor
     7. I can apply this knowledge to the Button and the Line Finder in the sensor kit
 
+
   Student Notes: 
 
   Documentation: 
@@ -20,10 +21,38 @@
     https://github.com/TempeHS/TempeHS_Ardunio_Boilerplate/blob/main/Ardunio_Bootcamp/04.digitalRead/Bootcamp-digitalRead.png
 */
 
-void setup() {
+static unsigned int myButton = 8;
+static unsigned int soundSensor = 7;
+static unsigned int lightSensor = 6;
+static unsigned int myLED = 5;
 
+void setup() {
+  Serial.begin(9600);
+  Serial.println("Configured to 9600");
+  Serial.println("------------------");
+  pinMode(myButton, INPUT);
+  pinMode(soundSensor, INPUT);
+  pinMode(lightSensor, INPUT);
+  pinMode(myLED, OUTPUT);
 }
 
 void loop() {
+  unsigned int btnval = digitalRead(myButton);
+  unsigned int sndval = digitalRead(soundSensor);
+  unsigned int litval = digitalRead(lightSensor);
+  Serial.print("ButtonValue:");
+  Serial.print(btnval);
+  Serial.print(",");
+  Serial.print("SoundValue:");
+  Serial.print(sndval);
+  Serial.print(",");
+  Serial.print("LightValue:");
+  Serial.print(litval);
+  Serial.println();
 
+  if (btnval){
+    digitalWrite(myLED, HIGH);
+    delay(500);
+  }
+  digitalWrite(myLED, LOW);
 }
