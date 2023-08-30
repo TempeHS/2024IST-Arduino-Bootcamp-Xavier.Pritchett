@@ -28,13 +28,40 @@
     https://github.com/TempeHS/TempeHS_Ardunio_Boilerplate/blob/main/Ardunio_Bootcamp/08.binaryLogic/Readme.md
     
   Schematic: 
-    
+  +-/* 
 */
 
+unsigned int Xvar = 1;
+unsigned int Yvar = 3;
+unsigned int theanswer = Xvar * Yvar;
+
 void setup() {
+Serial.begin(9600);
+Serial.println("it is configured to 9600");
+Serial.println("------------------------");
 
+  while (theanswer < 50) {
+    Serial.print("get stronger  ");
+    Serial.println(theanswer);
+    theanswer++;
+  }
+
+  if (theanswer == 72) {
+    Serial.println("it is 72");
+  } else if (theanswer > 8) {
+    Serial.println("more than 8");
+  } else {
+    Serial.println("something else");
+  }
+
+Serial.print(Xvar);
+Serial.print(" x ");
+Serial.print(Yvar);
+Serial.print(" = ");
+Serial.println(theanswer);
 }
-
 void loop() {
+
+
 
 }
