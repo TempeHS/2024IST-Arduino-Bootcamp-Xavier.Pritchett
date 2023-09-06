@@ -8,7 +8,6 @@
     4. I understand that a 180deg servo angle of movement is set by a frequency signal sent from the microcontroller
 
   Student Notes: 
-
   Documentation:
     https://www.sparkfun.com/servos
     https://github.com/arduino-libraries/Servo <-- We are still using this library
@@ -17,22 +16,23 @@
     https://www.tinkercad.com/things/lQ9RyYJRoLn?sharecode=MKlN0A7R0WGodkdTRKkPJO7I8PeI5L_GCR7pCclQ0qM
     https://github.com/TempeHS/TempeHS_Ardunio_Boilerplate/blob/main/Ardunio_Bootcamp/10.servoMotor/Bootcamp-servoMotor.png
 */
-
-//coding n writing
+//coding n writing 
 #include <Servo.h>
 #include "Ultrasonic.h"
-
-
+//libraries
+//open source everything :)
 Servo myServo;
 static unsigned int myServoPin = 7;
 static unsigned int myUSPin = 6;
 
 Ultrasonic myUSsensor(myUSPin);
 
-void setup() {
+bool isGateOpen;
 
+void setup() {
 myServo.attach(myServoPin);
 myServo.write(0);
+isGateOpen = false;
 delay(100);
 Serial.begin(9600);
 Serial.println("SM WORKING");
@@ -41,14 +41,11 @@ Serial.println("----------------");
 
 // The loop function runs over and over again forever
 void loop() {
-
-  unsigned long rangeInCM;
-  rangeInCM = myUSsensor.MeasureInCentimeters();
-  Serial.println(rangeInCM);
-  for (int i = 0; i <= 0; i++){
-    myServo.write(i);
-    delay(10);
+  
+  if (readUS() <= 25 ) {
+    openGate();
+  } else if (readUS() > 25 ){
+    closeGate();
   }
- myServo.write(0);
- delay(100);
+
 }
